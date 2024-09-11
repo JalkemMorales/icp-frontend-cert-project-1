@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import Login from "./Login";
 import Logout from "./Logout";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 function Navbar(){
+  const { isAuthenticaded } = useContext(AuthContext);
     return(
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -15,18 +18,10 @@ function Navbar(){
         <li class="nav-item">
           <Link className="nav-link" to="/">Productos</Link>
         </li>
-        {/* Este carrito solo tiene que mostrarse cuando el usuario esta autenticado */}
         <li class="nav-item">
           <Link className="nav-link" to="carrito"><i class="fa-solid fa-cart-shopping"></i></Link>
         </li>
-        {/* Si NO esta autenticado */}
-        {
-          <Login></Login>
-        }
-        {/* Si esta autenticado */}
-        {
-          <Logout></Logout>
-        }
+        { isAuthenticaded ? <Logout></Logout> : <Login></Login>}
       </ul>
     </div>
   </div>

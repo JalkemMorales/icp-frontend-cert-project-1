@@ -3,8 +3,11 @@ import Carrito from "./components/carrito";
 import Productos from "./components/productos";
 import Navbar from "./components/navbar";
 import PageNotFound from "./components/PageNotFound";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
+  const { } = useContext(AuthContext);
   return (
     <div className="App">
       <Navbar/>

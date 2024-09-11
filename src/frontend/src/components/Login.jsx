@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 function Login(){
-    const [isLogged, setIsLogged] = useState(false);
+    const { login } = useContext(AuthContext);
     return(
         <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa-solid fa-right-to-bracket"></i></a>
+            <button class="nav-link" onClick={login}><i class="fa-solid fa-right-to-bracket"></i></button>
         </li>
     );
 }

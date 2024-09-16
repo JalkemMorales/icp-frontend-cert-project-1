@@ -1,15 +1,38 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
+import { AuthClient } from '@dfinity/auth-client';
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }){
     const [isAuthenticaded, setIsAuthenticaded] = useState(false);
 
-    const login = () => {
-        setIsAuthenticaded(true);
+    useEffect(() => {
+        init();
+    }, [isAuthenticaded]);
+
+    async function init(){
+        const authClient = await AuthClient.create();
+        if(!authClient.getIdentity().getPrincipal().isAnonymous()){
+            setIsAuthenticaded(true);
+        }
     }
 
-    const logout = () => {
+    const login = async () => {
+        const authClient = await AuthClient.create();
+        authClient.login({
+            identityProvider: "http://bkyz2-fmaaa-aaaaa-qaaaq-cai.localhost:4943/",
+            onSuccess:async () => {
+                setIsAuthenticaded(true);
+            },
+            onError:(err) => {
+                console.log(err);
+            }
+        });
+    }
+
+    const logout = async () => {
+        const authClient = await AuthClient.create();
+        await authClient.logout();
         setIsAuthenticaded(false);
     }
 

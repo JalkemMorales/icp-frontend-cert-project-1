@@ -14,15 +14,12 @@ function Navbar(){
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <Link className="nav-link" to="/">Productos</Link>
         </li>
-        <li class="nav-item">
-          <Link className="nav-link" to="carrito"><i class="fa-solid fa-cart-shopping"></i></Link>
-        </li>
-        { isAuthenticaded ? <Logout></Logout> : <Login></Login>}
       </ul>
+      { isAuthenticaded ? <Logout></Logout> : <Login></Login>}
     </div>
   </div>
 </nav>

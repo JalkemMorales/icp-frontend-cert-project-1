@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { AuthClient } from '@dfinity/auth-client';
+import { Link, redirect, redirectDocument } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -7,10 +8,10 @@ export function AuthProvider({ children }){
     const [isAuthenticaded, setIsAuthenticaded] = useState(false);
 
     useEffect(() => {
-        init();
+        obtenerAuth();
     }, [isAuthenticaded]);
 
-    async function init(){
+    async function obtenerAuth(){
         const authClient = await AuthClient.create();
         if(!authClient.getIdentity().getPrincipal().isAnonymous()){
             setIsAuthenticaded(true);

@@ -1,0 +1,15 @@
+.master{
+    width: 80%;
+    margin: auto;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.cantidad{
+    width: 150px;
+}
+
+.Spinners{
+    display: none;
+    
+}

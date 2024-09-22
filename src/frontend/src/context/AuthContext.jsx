@@ -41,7 +41,7 @@ export function AuthProvider({ children }){
     const logout = async () => {
         const authClient = await AuthClient.create();
         await authClient.logout();
-        setIdentity(new AnonymousIdentity());
+        setIdentidad(new AnonymousIdentity());
         setIsAuthenticaded(false);
     }
 

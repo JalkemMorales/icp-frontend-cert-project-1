@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.scss";
 import { AuthProvider } from "./context/AuthContext";
+import * as bootstrap from 'bootstrap'
 
 // npm install react-router-dom
 

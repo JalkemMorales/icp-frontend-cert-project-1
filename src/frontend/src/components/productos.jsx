@@ -8,7 +8,6 @@ function Productos() {
   const { isAuthenticaded, Identidad } = useContext(AuthContext);
 
   const [productos, setProductos] = useState([]);
-  const [producto, setProductoCar] = useState("");
 
   useEffect(() => {
     getProducts();
@@ -26,7 +25,6 @@ function Productos() {
   async function getProducts() {
     try {
       const result = await backend.getProducts();
-      console.log(result);
       setProductos(result);
     } catch (err) {
       console.log(err);

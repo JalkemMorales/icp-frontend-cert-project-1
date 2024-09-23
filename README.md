@@ -45,3 +45,5 @@ En las pruebas realizadas, las variables de entorno utilizadas fueron las siguie
 Por ultimo, se cambio levemente el archivo ".ic-assets.json5" ya que se trabajo con CDNs
 "Content-Security-Policy": "default-src *; script-src *; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
 
+## Proyecto realizado enteramente en Linux Mint
+

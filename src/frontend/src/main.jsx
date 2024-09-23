@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.scss";
 import { AuthProvider } from "./context/AuthContext";
+import { CartProvider } from "./context/CartContext";
 import * as bootstrap from 'bootstrap'
 
 // npm install react-router-dom
@@ -11,7 +12,9 @@ import * as bootstrap from 'bootstrap'
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
   <AuthProvider>
-    <App/>
+    <CartProvider>
+    <App/>  
+    </CartProvider>
   </AuthProvider>
   </BrowserRouter>
 );

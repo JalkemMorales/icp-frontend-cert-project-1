@@ -3,9 +3,11 @@ import { backend, createActor } from "../declarations";
 import "../css/productos.css";
 import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthContext";
+import { CartContext, usarCarrito } from "../context/CartContext";
 
 function Productos() {
   const { isAuthenticaded, Identidad } = useContext(AuthContext);
+  const { AnadirCarrito } = usarCarrito();
 
   const [productos, setProductos] = useState([]);
 
@@ -17,7 +19,7 @@ function Productos() {
 
   let backend = createActor(Canister, {
     agentOptions: {
-        identity: Identidad,
+      identity: Identidad,
       host: "http://localhost:4943",
     },
   });
@@ -36,18 +38,25 @@ function Productos() {
       if (cantidad) {
         if (cantidad > 0 && cantidad < 99) {
           try {
-            await backend.addToCart(id, BigInt(cantidad));
             Swal.fire({
-              title: "Se ha agregado",
-              text: "Se ha agregado al carrito.",
-              icon: "success",
+              title: "",
+              html: "<p>Por favor, espere a que se guarde en su carrito.</p><div class='spinner-border text-success' role='status'><span class='visually-hidden'>Loading...</span></div>",
+              showConfirmButton: false,
+              backdrop: 'rgba(0, 0, 0, 0.5)',
+              allowOutsideClick: false
             });
+            await AnadirCarrito(id, cantidad);
+            Swal.fire({
+                title: "Se ha agregado",
+                text: "Se ha agregado al carrito.",
+                icon: "success",
+              });
           } catch (err) {
             Swal.fire({
-                icon: "error",
-                title: "Error...",
-                text: "Hubo un error al guardar en el carrito: " + err,
-              });
+              icon: "error",
+              title: "Error...",
+              text: "Hubo un error al guardar en el carrito: " + err,
+            });
           }
         } else {
           Swal.fire({
@@ -90,7 +99,7 @@ function Productos() {
                   placeholder="0"
                   class="cantidad"
                   onChange={(e) => (producto.quantity = e.target.value)}
-                />
+                /><br/><br/>
                 <button
                   class="btn btn-primary"
                   onClick={() => AgregarCarrito(producto.id, producto.quantity)}

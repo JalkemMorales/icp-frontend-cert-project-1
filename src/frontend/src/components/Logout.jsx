@@ -1,13 +1,16 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { usarCarrito } from "../context/CartContext";
 
 function Logout(){
     const { logout } = useContext(AuthContext);
+    const { getCarrito } = usarCarrito();
+
     return(
         <ul class="navbar-nav">
         <li class="nav-item">
-        <Link className="nav-link" to="carrito"><i class="fa-solid fa-cart-shopping"></i></Link>
+        <Link className="nav-link" to="carrito" onClick={getCarrito}><i class="fa-solid fa-cart-shopping"></i></Link>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toogle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

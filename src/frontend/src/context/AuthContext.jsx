@@ -24,7 +24,7 @@ export function AuthProvider({ children }){
     const login = async () => {
         const authClient = await AuthClient.create();
         let Canister = process.env.CANISTER_ID_INTERNET_IDENTITY;
-        let IdentityProvider = 'http://'+Canister+'.localhost:4943/'
+        let IdentityProvider = 'http://'+Canister+'.localhost:5173/'
         authClient.login({
             identityProvider: IdentityProvider,
             onSuccess:async () => {
@@ -43,6 +43,7 @@ export function AuthProvider({ children }){
         await authClient.logout();
         setIdentidad(new AnonymousIdentity());
         setIsAuthenticaded(false);
+        window.location.href = '/?canisterId=' + process.env.CANISTER_ID_FRONTEND;
     }
 
     return(

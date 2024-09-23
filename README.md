@@ -1,59 +1,47 @@
-# `icp-frontend-project-1`
+# `Frontend Project - Bryan Misael Morales Martin`
 
-Welcome to your new `icp-frontend-project-1` project and to the Internet Computer development community. By default, creating a new project adds this README and some template files to your project directory. You can edit these template files to customize your project and to include your own code to speed up the development cycle.
+Este proyecto se basa en la creacion de un frontend utilizando el Framework de React, este debe poseer todas las cosas vistas en el curso, ya sea el renderizado dinamico de vistas, useEffect, useState, Context, etc. y tambien se busca que posea autenticacion utilizando internet identity y permita observar los chats de la plataforma Open Chat. 
 
-To get started, you might want to explore the project directory structure and the default configuration file. Working with this project in your development environment will not affect any production deployment or identity tokens.
+## Librerias utilizadas
 
-To learn more before you start working with `icp-frontend-project-1`, see the following documentation available online:
+- [Bootstrap 5.3]
+- [FontAwesome]
+- [SweetAlert2]
+- [React-router-dom]
+Ademas de las implementadas para la funcionalidad de Internet Identity y OpenChat
 
-- [Quick Start](https://internetcomputer.org/docs/current/developer-docs/setup/deploy-locally)
-- [SDK Developer Tools](https://internetcomputer.org/docs/current/developer-docs/setup/install)
-- [Motoko Programming Language Guide](https://internetcomputer.org/docs/current/motoko/main/motoko)
-- [Motoko Language Quick Reference](https://internetcomputer.org/docs/current/motoko/main/language-manual)
+## Ejecución
 
-If you want to start working on your project right away, you might want to try the following commands:
-
+La aplicacion se trabajo de manera local, utilizando los comandos
 ```bash
-cd icp-frontend-project-1/
-dfx help
-dfx canister --help
-```
+dfx start --host 127.0.0.1:5173
 
-## Running the project locally
-
-If you want to test your project locally, you can use the following commands:
-
-```bash
-# Starts the replica, running in the background
-dfx start --background
-
-# Deploys your canisters to the replica and generates your candid interface
 dfx deploy
 ```
 
-Once the job completes, your application will be available at `http://localhost:4943?canisterId={asset_canister_id}`.
+## Aplicación
 
-If you have made changes to your backend canister, you can generate a new candid interface with
+La aplicacion consiste en lo siguiente:
 
-```bash
-npm run generate
+En la primera pantalla se enlistan todos los productos obtenidos por el backend proporcionado, cada uno con su propio input para ingresar la cantidad necesitada, ademas de un boton que funciona para añadirse al carrito.
+
+Este ultimo solo se puede utilizar si el usuario esta autenticado, para eso, se necesita iniciar sesion utilizando la implementacion de Internet Identity. Una vez con la sesion iniciada, ya se puede empezar a ingresar productos.
+
+En el apartado del carrito, se tiene una lista que posee el nombre, descripcion, imagen, cantidad y precio total de cada uno de los productos. Estando en esta pantalla, se puede actualizar la cantidad del producto utilizando el input de cada uno y pulsando el boton de un lado de este. Si se llega a ingresar una cantidad menor a cero, la aplicacion preguntara al usuario si se quiere borrar ese producto de la lista, en una respuesta afirmativa, se hara el borrado de este y se regresara a la pantalla principal.
+
+Durante toda la ejecucion de la aplicacion, en el lado inferior derecho se tiene un boton que permite acceder a OpenChat (realizando pruebas utilizando 
+```bash 
+npm run start
 ```
+se logro que esta implementacion funcionase, ya que al parecer la pagina esta configurada para evitar verse incrustada en otro sitio web).
 
-at any time. This is recommended before starting the frontend development server, and will be run automatically any time you run `dfx deploy`.
+## Variables de entorno
 
-If you are making frontend changes, you can start a development server with
+En las pruebas realizadas, las variables de entorno utilizadas fueron las siguientes:
+- CANISTER_ID_FRONTEND='bd3sg-teaaa-aaaaa-qaaba-cai'
+- CANISTER_ID_BACKEND='bkyz2-fmaaa-aaaaa-qaaaq-cai'
+- CANISTER_ID_INTERNET_IDENTITY='be2us-64aaa-aaaaa-qaabq-cai'
 
-```bash
-npm start
-```
+Por ultimo, se cambio levemente el archivo ".ic-assets.json5" ya que se trabajo con CDNs
+"Content-Security-Policy": "default-src *; script-src *; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
 
-Which will start a server at `http://localhost:8080`, proxying API requests to the replica at port 4943.
-
-### Note on frontend environment variables
-
-If you are hosting frontend code somewhere without using DFX, you may need to make one of the following adjustments to ensure your project does not fetch the root key in production:
-
-- set`DFX_NETWORK` to `ic` if you are using Webpack
-- use your own preferred method to replace `process.env.DFX_NETWORK` in the autogenerated declarations
-  - Setting `canisters -> {asset_canister_id} -> declarations -> env_override to a string` in `dfx.json` will replace `process.env.DFX_NETWORK` with the string in the autogenerated declarations
-- Write your own `createActor` constructor

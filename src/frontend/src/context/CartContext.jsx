@@ -14,7 +14,7 @@ export function CartProvider({ children }) {
   let backend = createActor(Canister, {
     agentOptions: {
       identity: Identidad,
-      host: "http://localhost:4943",
+      host: "http://localhost:5173",
     },
   });
 

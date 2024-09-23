@@ -7,6 +7,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "./context/AuthContext";
 import "./css/main.css";
 import OpenChatFrame from "./components/OpenChatFrame";
+import Pie from "./components/footer";
 
 function App() {
   const {} = useContext(AuthContext);
@@ -23,9 +24,10 @@ function App() {
           <Route path="carrito" element={<Carrito />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+        <Pie></Pie>
         <button
             id="btnfixed"
-            class="btn btn-primary fixeado"
+            class="btn btn-success fixeado"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#collapseWidthExample"

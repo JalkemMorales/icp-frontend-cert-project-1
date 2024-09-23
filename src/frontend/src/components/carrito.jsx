@@ -17,7 +17,7 @@ function Carrito() {
   let backend = createActor(Canister, {
     agentOptions: {
       identity: Identidad,
-      host: "http://localhost:4943",
+      host: "http://localhost:5173",
     },
   });
 
@@ -35,6 +35,7 @@ function Carrito() {
   }
 
   return (
+    Cart.length == 0 ? <p style={{textAlign: 'center'}}>No hay productos en el carrito</p> :
     <div class="master">
       {Cart.map((producto, id) => (
         <div class="card mb-3" style={{ maxWidth: "100%" }}>
@@ -118,7 +119,7 @@ function Carrito() {
                         allowOutsideClick: false
                       }).then((result) => {
                         if (result.isConfirmed || result.dismiss) {
-                            window.location.href = '/';
+                            window.location.href = '/?canisterId=' + process.env.CANISTER_ID_FRONTEND;
                         }});
                 }catch(err){
                     console.log(err);

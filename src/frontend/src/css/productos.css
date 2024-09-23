@@ -1,5 +1,5 @@
 .master{
-    width: 80%;
+    width: 85%;
     margin: auto;
     padding-top: 40px;
     padding-bottom: 40px;
@@ -10,6 +10,9 @@
 }
 
 .Spinners{
-    display: none;
-    
+    display: none;   
+}
+
+.card{
+    box-shadow: 2px 2px 5px black;
 }
